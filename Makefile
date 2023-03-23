@@ -6,7 +6,7 @@
 #    By: javiersa <javiersa@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/09 19:21:46 by javiersa          #+#    #+#              #
-#    Updated: 2022/12/12 16:45:30 by javiersa         ###   ########.fr        #
+#    Updated: 2023/03/23 19:54:24 by javiersa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,19 +74,14 @@ clean:
 fclean: clean
 	$(CLEAN) ./$(NAME)
 re: fclean all
+	
 #Personal use
-compile:
-	make all
-	make bonus
-	$(CC) $(CFLAGS) $(NAME) main.c | ./a.out | rm a.out
-git:
-	chmod -R 755 *
+git: fclean gitignore
 	git add *
 	git commit -m "AUTOMATIC COMMIT"
 	git push
 	git ls-files
 gitignore:
-	echo ".*\n!.gitignore\n*.out\n*.o\n*.a">.gitignore
-	
+	echo ".*\n*.out\n*.o\n*.a">.gitignore
 
 .PHONY : all clean fclean re bonus compile git gitignore
