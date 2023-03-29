@@ -6,11 +6,12 @@
 #    By: javiersa <javiersa@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/09 19:21:46 by javiersa          #+#    #+#              #
-#    Updated: 2023/03/23 19:54:24 by javiersa         ###   ########.fr        #
+#    Updated: 2023/03/29 21:34:33 by javiersa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
+PERSONALNAME = Libft
 CFLAGS = -Wall -Werror -Wextra
 CC = gcc
 CLEAN = rm -Rf
@@ -63,18 +64,24 @@ OBJS := $(SRC:.c=.o)
 BONUS_OBJS := $(BONUS_SRC:.c=.o)
 
 all: $(NAME)
+
 bonus: $(BONUS_OBJS)
-	ar rcs $(NAME) $(BONUS_OBJS)
+	@ar rcs $(NAME) $(BONUS_OBJS)
+	@echo "$(GREEN)$(PERSONALNAME)_bonus -> Objects and library created successfully.$(DEFAULT)"
 $(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+	@ar rcs $(NAME) $(OBJS)
+	@echo "$(GREEN)$(PERSONALNAME) -> Objects and library created successfully.$(DEFAULT)"
 .c.o:
-	$(CC) $(CFLAGS) -c $< -o ${<:.c=.o}
+	@$(CC) $(CFLAGS) -c $< -o ${<:.c=.o}
 clean:
-	$(CLEAN) ./$(OBJS) ./$(BONUS_OBJS)
-fclean: clean
-	$(CLEAN) ./$(NAME)
+	@$(CLEAN) ./$(OBJS) ./$(BONUS_OBJS)
+	@echo "$(RED)$(PERSONALNAME) -> Objects files deleted.$(DEFAULT)"
+fclean:
+	@$(CLEAN) ./$(OBJS) ./$(BONUS_OBJS)
+	@$(CLEAN) ./$(NAME)
+	@echo "$(RED)$(PERSONALNAME) -> Library and objects files deleted.$(DEFAULT)"
 re: fclean all
-	
+
 #Personal use
 git: fclean gitignore
 	git add *
@@ -82,6 +89,13 @@ git: fclean gitignore
 	git push
 	git ls-files
 gitignore:
-	echo ".*\n*.out\n*.o\n*.a">.gitignore
+	@echo ".*\n*.out\n*.o\n*.a">.gitignore
+	@echo "$(GREEN)Gitignore created successfully.$(DEFAULT)"
 
 .PHONY : all clean fclean re bonus compile git gitignore
+
+#COLORS
+RED = \033[1;31m
+GREEN = \033[1;32m
+YELLOW = \033[1;33m
+DEFAULT = \033[0m
